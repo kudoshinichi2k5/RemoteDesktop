@@ -149,16 +149,17 @@ namespace Server
                     if (bytesRead == 0) break; // Kết thúc nếu không nhận được dữ liệu
 
                     string message = Encoding.ASCII.GetString(buffer, 0, bytesRead).Trim();
-                    Console.WriteLine("Received message: " + message); // Debug thông điệp nhận được
 
                     if (message == "GETLOGS")
                     {
                         SendLogs(stream);
+
                     }
                     else
                     {
                         ProcessControlEvent(message);
                     }
+                   
                 }
                 catch (Exception ex)
                 {

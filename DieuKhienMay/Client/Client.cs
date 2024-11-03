@@ -104,6 +104,12 @@ namespace Client
         // Yeu cau lich su ket noi tu server
         private void requestLogsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Kiểm tra xem client có đang kết nối hay không
+            if (client != null && client.Connected)
+            {
+                MessageBox.Show("Cannot request logs while connected to server.");
+                return;
+            }
             RequestLogs();
         }
 
@@ -133,7 +139,7 @@ namespace Client
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Không thể lấy log: " + ex.Message);
+                        MessageBox.Show("Không thể lấy log: " + ex.Message);
                 }
             }
         }
