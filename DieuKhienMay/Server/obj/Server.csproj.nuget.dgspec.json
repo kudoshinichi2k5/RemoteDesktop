@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\kudo\\NT106\\DoAnCuoiKi\\NT106.P12---Group-11\\DieuKhienMay\\Server\\Server.csproj": {}
+    "D:\\kudo\\NT106\\DoAnCuoiKi\\TestDoAn\\DieuKhienMay\\Server\\Server.csproj": {}
   },
   "projects": {
-    "D:\\kudo\\NT106\\DoAnCuoiKi\\NT106.P12---Group-11\\DieuKhienMay\\Server\\Server.csproj": {
+    "D:\\kudo\\NT106\\DoAnCuoiKi\\TestDoAn\\DieuKhienMay\\Server\\Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\kudo\\NT106\\DoAnCuoiKi\\NT106.P12---Group-11\\DieuKhienMay\\Server\\Server.csproj",
+        "projectUniqueName": "D:\\kudo\\NT106\\DoAnCuoiKi\\TestDoAn\\DieuKhienMay\\Server\\Server.csproj",
         "projectName": "Server",
-        "projectPath": "D:\\kudo\\NT106\\DoAnCuoiKi\\NT106.P12---Group-11\\DieuKhienMay\\Server\\Server.csproj",
+        "projectPath": "D:\\kudo\\NT106\\DoAnCuoiKi\\TestDoAn\\DieuKhienMay\\Server\\Server.csproj",
         "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
-        "outputPath": "D:\\kudo\\NT106\\DoAnCuoiKi\\NT106.P12---Group-11\\DieuKhienMay\\Server\\obj\\",
+        "outputPath": "D:\\kudo\\NT106\\DoAnCuoiKi\\TestDoAn\\DieuKhienMay\\Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
