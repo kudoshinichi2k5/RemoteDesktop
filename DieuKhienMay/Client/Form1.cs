@@ -160,6 +160,9 @@ namespace Client
             base.OnFormClosing(e);
         }
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

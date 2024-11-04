@@ -58,6 +58,12 @@ namespace Client
                 client.Connect(txbIP.Text, port);
                 MessageBox.Show("Connected to server!");
 
+                NetworkStream stream = client.GetStream();
+
+                // Gửi thông báo "MAIN" để server biết đây là kết nối chính thức
+                byte[] mainRequest = Encoding.ASCII.GetBytes("MAIN\n");
+                stream.Write(mainRequest, 0, mainRequest.Length);
+
                 // Mở Form2 để hiển thị màn hình server
                 Form1 displayForm = new Form1(client);
                 displayForm.Show();
@@ -125,9 +131,10 @@ namespace Client
 
                     NetworkStream stream = tempClient.GetStream();
 
-                    // Gửi yêu cầu "GETLOGS"
-                    byte[] requestBytes = Encoding.ASCII.GetBytes("GETLOGS\n");
-                    stream.Write(requestBytes, 0, requestBytes.Length);
+                    // Gửi thông báo "TEMP" để thông báo đây là kết nối tạm thời
+                    byte[] tempRequest = Encoding.ASCII.GetBytes("TEMP\n");
+                    stream.Write(tempRequest, 0, tempRequest.Length);
+
 
                     // Đọc phản hồi chứa log
                     byte[] buffer = new byte[4096];

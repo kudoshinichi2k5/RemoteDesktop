@@ -80,26 +80,34 @@ namespace Server
             server.Start();
             client = server.AcceptTcpClient();
             // Ghi lại thông tin kết nối gồm địa chỉ IP và status
-            /*LogConnection("Connected", ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString());*/
-
-            // Ghi lại thông tin kết nối gồm địa chỉ IP
-            LogConnection1(((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString());
-
+            // Kiểm tra xem đây là kết nối tạm thời hay chính thức
             NetworkStream stream = client.GetStream();
+            byte[] buffer = new byte[1024];
+            int bytesRead = stream.Read(buffer, 0, buffer.Length);
+            string requestType = Encoding.ASCII.GetString(buffer, 0, bytesRead).Trim();
 
+            if (requestType == "TEMP")
+            {
+                SendLogs(stream);
+            }
+            else if (requestType == "MAIN")
+            {
+                Console.WriteLine("Main connection request received.");
+                LogConnection1(((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString());
 
-            // Bắt đầu gửi hình ảnh sau khi kết nối thành công
-            sendingThread = new Thread(() => SendDesktopImages(stream));
-            sendingThread.Start();
+                // Khởi động các luồng để gửi ảnh và nhận sự kiện
+                sendingThread = new Thread(() => SendDesktopImages(stream));
+                sendingThread.Start();
 
-            controlThread = new Thread(() => ReceiveControlEvents(stream));
-            controlThread.Start();
+                controlThread = new Thread(() => ReceiveControlEvents(stream));
+                controlThread.Start();
+            }
         }
 
         // Ket thuc ket noi
         private void StopListening()
         {
-            
+
         }
 
 
@@ -150,16 +158,7 @@ namespace Server
 
                     string message = Encoding.ASCII.GetString(buffer, 0, bytesRead).Trim();
 
-                    if (message == "GETLOGS")
-                    {
-                        SendLogs(stream);
-
-                    }
-                    else
-                    {
-                        ProcessControlEvent(message);
-                    }
-                   
+                    ProcessControlEvent(message);    
                 }
                 catch (Exception ex)
                 {
@@ -168,6 +167,7 @@ namespace Server
                 }
             }
         }
+
         private void ProcessControlEvent(string message)
         {
             string[] parts = message.Split(':');
@@ -438,5 +438,6 @@ namespace Server
             FileTransfer fileTransfer = new FileTransfer();
             fileTransfer.Show();
         }
+
     }
 }
